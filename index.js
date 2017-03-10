@@ -30,7 +30,21 @@ var Animal = mongoose.model('Animal', animalSchema);
 //   }
 // });
 //GET /animals
+server.get('/animals', function(req,res){
+  Animal.find({}, function(err, documents){
+    if(err){
+      res.status(500).json({
+        msg: err
+      });
+    } else {
+      res.status(200).json({
+        animals: documents
+      })
+    }
+  });
+});
 //Get /animals/:id
+server.get('/animals/:id', function(req,res){});
 //POST /animals
 //PUT /animals/:id
 //DELETE /animals/:id
